@@ -25,7 +25,7 @@ import { createHttpObservable } from '../common/util';
 })
 export class CourseComponent implements OnInit, AfterViewInit {
 
-    courseId: string;
+    courseId: number;
 
     course$: Observable<Course>;
     lessons$: Observable<Lesson[]>;
@@ -43,7 +43,6 @@ export class CourseComponent implements OnInit, AfterViewInit {
         this.courseId = this.route.snapshot.params['id'];
 
         this.course$ = createHttpObservable(`/api/courses/${this.courseId}`);
-
 
 
 
