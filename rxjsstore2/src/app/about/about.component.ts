@@ -63,7 +63,7 @@ export class AboutComponent implements OnInit {
 
 
 // REPLAY SUBJECT
-      const subject = new ReplaySubject();
+/*       const subject = new ReplaySubject();
 
       const series$ = subject.asObservable();
       series$.subscribe(val => console.log("first sub:" + val));
@@ -83,7 +83,7 @@ export class AboutComponent implements OnInit {
 
         subject.next(4);
 
-      }, 3000)
+      }, 3000) */
 
     }
 
