@@ -30,6 +30,8 @@ export class CourseComponent implements OnInit, AfterViewInit {
 
     course$ : Observable<Course>;
 
+    // course: Course;
+
     lessons$: Observable<Lesson[]>;
 
 
@@ -44,14 +46,22 @@ export class CourseComponent implements OnInit, AfterViewInit {
 
         this.courseId = this.route.snapshot.params['id'];
 
-        this.course$ = this.store.selectCourseById(this.courseId)
-        .pipe(
-          // first()
-          take(1)
-        );
+        this.course$ = this.store.selectCourseById(this.courseId);
 
-        // forkJoin(this.course$, this.loadLessons()).subscribe(console.log); --wont execute, bc no completion of obsv
-        forkJoin([this.course$, this.loadLessons()]).subscribe(console.log);
+
+        // this.course$.subscribe(course => this.course = course)
+
+        this.loadLessons()
+          .pipe(
+            withLatestFrom(this.course$)
+          )
+          .subscribe(([lessons, course]) => {
+
+            console.log("lessons", lessons);
+            console.log("course", course);
+
+          });
+
     }
 
     ngAfterViewInit() {
